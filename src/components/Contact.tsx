@@ -17,6 +17,12 @@ const contactMethods = [
     value: "Tondo, Manila",
     href: undefined,
   },
+  {
+    icon: "\uD83D\uDD17",
+    label: "LinkedIn",
+    value: "Albert Astucia",
+    href: "https://www.linkedin.com/in/albert-astucia-4670b723a",
+  },
 ];
 
 export default function Contact() {
@@ -47,7 +53,7 @@ export default function Contact() {
         </div>
 
         {/* Contact cards */}
-        <div className="mt-14 grid gap-6 sm:grid-cols-3">
+        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {contactMethods.map(({ icon, label, value, href }) => {
             const content = (
               <>
@@ -66,8 +72,15 @@ export default function Contact() {
             const sharedClasses =
               "group flex flex-col items-center rounded-2xl bg-warm-50 px-6 py-10 text-center transition-all duration-300 hover:shadow-lg hover:-translate-y-1";
 
+            const isExternal = href?.startsWith("http");
+
             return href ? (
-              <a key={label} href={href} className={sharedClasses}>
+              <a
+                key={label}
+                href={href}
+                className={sharedClasses}
+                {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+              >
                 {content}
               </a>
             ) : (
